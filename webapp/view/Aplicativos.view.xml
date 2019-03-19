@@ -1,0 +1,77 @@
+<mvc:View controllerName="br.com.idxtecAplicativos.controller.Aplicativos"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table">
+	<App id="app">
+		<pages>
+			<Page>
+				<content>
+					<t:Table id="tableApp"
+						alternateRowColors="true"
+						rows="{
+							path: '/Aplicativos',
+							parameters: {
+								expand: 'ModuloDetails'
+							}
+						}">
+						<t:toolbar>
+							<Toolbar>
+								<Title text="Lista de Aplicativos"/>
+							</Toolbar>
+						</t:toolbar>
+						<t:columns>
+							<t:Column filterProperty="AppId" sortProperty="AppId">
+								<Label text="ID do App"/>
+								<t:template>
+									<Text text="{AppId}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Codigo" sortProperty="Codigo">
+								<Label text="Código"/>
+								<t:template>
+									<Text text="{Codigo}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Descricao" sortProperty="Descricao">
+								<Label text="Descrição"/>
+								<t:template>
+									<Text text="{Descricao}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="NomeMenu" sortProperty="NomeMenu">
+								<Label text="Nome no Menu"/>
+								<t:template>
+									<Text text="{NomeMenu}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Path" sortProperty="Path">
+								<Label text="URL"/>
+								<t:template>
+									<Text text="{Path}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="ModuloDetails/Nome" sortProperty="ModuloDetails/Nome">
+								<Label text="Modulo" />
+								<t:template>
+									<Text text="{ModuloDetails/Nome}"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+				</content>
+				<footer>
+					<Toolbar>
+						<Button icon="sap-icon://refresh" press="onRefresh"/>
+						<ToolbarSpacer/>
+						<Button text="Incluir novo" press="onIncluir"/>
+						<Button text="Editar" press="onEditar"/>
+						<Button text="Remover" press="onRemover"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
