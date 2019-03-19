@@ -22,8 +22,9 @@ sap.ui.define([
 			this._oErrorHandler = new ErrorHandler(this);
 			UIComponent.prototype.init.apply(this, arguments);
 
-			// set the device model
+			// set models
 			this.setModel(models.createDeviceModel(), "device");
+			this.setModel(models.createViewModel(), "view");
 			
 			this.getRouter().initialize();
 		},

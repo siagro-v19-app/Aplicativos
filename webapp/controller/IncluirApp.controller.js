@@ -24,11 +24,17 @@ sap.ui.define([
 			var oParam = this.getOwnerComponent().getModel("parametros").getData();
 			var oJSONModel = this.getOwnerComponent().getModel("model");
 			var oModel = this.getOwnerComponent().getModel();
+			var oViewModel = this.getOwnerComponent().getModel("view"); 
 			
 			this._operacao = oParam.operacao;
 			this._sPath = oParam.sPath;
 			
 			if (this._operacao === "incluir"){
+				
+				oViewModel.setData({
+					titulo: "Inserir Novo App"
+				});
+				
 				var oNovoApp = {
 					"Id": 0,
 					"AppId": "",
@@ -44,6 +50,11 @@ sap.ui.define([
 				this.getView().byId("modulo").setSelectedKey("");
 				
 			} else if (this._operacao === "editar"){
+				
+				oViewModel.setData({
+					titulo: "Editar App"
+				});
+				
 				oModel.read(oParam.sPath,{
 					success: function(oData) {
 						oJSONModel.setData(oData);
@@ -56,33 +67,33 @@ sap.ui.define([
 		},
 		
 		onSalvar: function(){
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-			
-			if (this._checarCampos(this.getView())) {
-				MessageBox.information("Campo(s) obrigatorio(s) não preenchido(s)");
+			if (this._checarCampos(this.getView()) === true) {
+				MessageBox.information("Preencha todos os campos obrigatórios!");
 				return;
 			}
 			
 			if (this._operacao === "incluir") {
 				this._createApp();
-				if (sPreviousHash !== undefined) {
-					window.history.go(-1);
-				} else {
-					oRouter.navTo("aplicativos", {}, true);
-				}
 			} else if (this._operacao === "editar") {
 				this._updateApp();
-				if (sPreviousHash !== undefined) {
-					window.history.go(-1);
-				} else {
-					oRouter.navTo("aplicativos", {}, true);
-				}
+			}
+		},
+		
+		_goBack: function(){
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+			
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				oRouter.navTo("aplicativos", {}, true);
 			}
 		},
 		
 		_createApp: function() {
+			var that = this; 
+			
 			var oModel = this.getOwnerComponent().getModel();
 			var oJSONModel = this.getOwnerComponent().getModel("model");
 			
@@ -97,7 +108,11 @@ sap.ui.define([
 			
 			oModel.create("/Aplicativos", oDados, {
 				success: function() {
-					MessageBox.success("Dados gravados.");
+					MessageBox.success("Aplicativo inserido com sucesso!",{
+						onClose: function(){
+							that._goBack();
+						}
+					});
 				},
 				error: function(oError) {
 					MessageBox.error(oError.responseText);
@@ -106,6 +121,8 @@ sap.ui.define([
 		},
 		
 		_updateApp: function() {
+			var that = this;
+			
 			var oModel = this.getOwnerComponent().getModel();
 			var oJSONModel = this.getOwnerComponent().getModel("model");
 			
@@ -119,7 +136,11 @@ sap.ui.define([
 			
 			oModel.update(this._sPath, oDados, {
 					success: function() {
-					MessageBox.success("Dados gravados.");
+					MessageBox.success("Aplicativo alterado com sucesso!", {
+						onClose: function(){
+							that._goBack();
+						}
+					});
 				},
 				error: function(oError) {
 					MessageBox.error(oError.responseText);
@@ -137,15 +158,7 @@ sap.ui.define([
 		},
 		
 		onVoltar: function(){
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-		
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				oRouter.navTo("aplicativos", {}, true);
-			}
+			this._goBack();
 		}
 	});
 });
