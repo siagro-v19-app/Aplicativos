@@ -91,22 +91,26 @@ sap.ui.define([
 			}
 		},
 		
-		_createApp: function() {
-			var that = this; 
-			
-			var oModel = this.getOwnerComponent().getModel();
+		_getDados: function() {
 			var oJSONModel = this.getOwnerComponent().getModel("model");
-			
 			var oDados = oJSONModel.getData();
-			//Modulo = id, mas vem como string
+			
 			oDados.Modulo = parseInt(oDados.Modulo, 0);
+			
 			oDados.ModuloDetails = {
 				__metadata: {
 					uri: "/Modulos(" + oDados.Modulo + ")"
 				}
 			};
 			
-			oModel.create("/Aplicativos", oDados, {
+			return oDados;
+		},
+		
+		_createApp: function() {
+			var that = this; 
+			var oModel = this.getOwnerComponent().getModel();
+
+			oModel.create("/Aplicativos", this._getDados(), {
 				success: function() {
 					MessageBox.success("Aplicativo inserido com sucesso!",{
 						onClose: function(){
@@ -122,19 +126,9 @@ sap.ui.define([
 		
 		_updateApp: function() {
 			var that = this;
-			
 			var oModel = this.getOwnerComponent().getModel();
-			var oJSONModel = this.getOwnerComponent().getModel("model");
-			
-			var oDados = oJSONModel.getData();
-			oDados.Modulo = parseInt(oDados.Modulo, 0);
-			oDados.ModuloDetails = {
-				__metadata: {
-					uri: "/Modulos(" + oDados.Modulo + ")"
-				}
-			};
-			
-			oModel.update(this._sPath, oDados, {
+
+			oModel.update(this._sPath, this._getDados(), {
 					success: function() {
 					MessageBox.success("Aplicativo alterado com sucesso!", {
 						onClose: function(){

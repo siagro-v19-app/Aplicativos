@@ -61,7 +61,7 @@ sap.ui.define([
 				onClose: function(sResposta){
 					if(sResposta === "OK"){
 						that._remover(oTable, nIndex);
-						MessageBox.information("Aplicativo removido com sucesso!");
+						MessageBox.success("Aplicativo removido com sucesso!");
 					}
 				}
 			});
