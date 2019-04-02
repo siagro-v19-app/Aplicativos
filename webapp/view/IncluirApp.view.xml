@@ -6,58 +6,60 @@
 	xmlns:f="sap.ui.layout.form">
 	<App>
 		<pages>
-			<Page showNavButton="true"
-				navButtonPress="onVoltar">
+			<Page showHeader="false">
 				<content>
-					<VBox class="sapUiSmallMargin">	
-						<f:SimpleForm id="SimpleFormChange480_Trial"
-						editable="true"
-						layout="ResponsiveGridLayout"
-						title="{view>/titulo}"
-						labelSpanXL="4"
-						labelSpanL="4"
-						labelSpanM="4"
-						labelSpanS="12"
-						adjustLabelSpan="false"
-						emptySpanXL="0"
-						emptySpanL="0"
-						emptySpanM="0"
-						emptySpanS="0"
-						columnsXL="3"
-						columnsL="2"
-						columnsM="2"
-						singleContainerFullSize="false">
-							<f:content>
-								<Label text="ID do App" labelFor="appid"/>
-								<Input id="appid" value="{model>/AppId}" required="true"/>
-						
-								<Label text="Código" labelFor="codigo"/>
-								<Input id="codigo" value="{model>/Codigo}" required="true"/>
-								
-								<Label text="Nome no menu" labelFor="nomemenu"/>
-								<Input id="nomemenu" value="{model>/NomeMenu}" required="true"/>
-								
-								<Label text="URL" labelFor="url"/>
-								<Input id="url" value="{model>/Path}" required="true"/>
-								
-								<Label text="Módulo" labelFor="modulo"/>
-								<ComboBox selectedKey="{model>/Modulo}"
-									items="{path: '/Modulos'}"
-									required="true"
-									id="modulo"> 
-									<core:ListItem key="{Id}" text="{Nome}"/>
-								</ComboBox>
-								
-								<Label text="Descrição" labelFor="descricao"/>
-								<TextArea id="descricao" value="{model>/Descricao}" rows="6" maxLength="254"/>
-							</f:content>
-						</f:SimpleForm>
+					<VBox class="sapUiSmallMargin">
+						<Panel headerText="Aplicativos">
+							<f:SimpleForm id="formApp"
+								editable="true"
+								layout="ResponsiveGridLayout"
+								labelSpanXL="4"
+								labelSpanL="4"
+								labelSpanM="4"
+								labelSpanS="12"
+								adjustLabelSpan="false"
+								emptySpanXL="0"
+								emptySpanL="0"
+								emptySpanM="0"
+								emptySpanS="0"
+								columnsXL="3"
+								columnsL="2"
+								columnsM="2"
+								singleContainerFullSize="false">
+								<f:content>
+									<core:Title text="{view>/titulo}"/>
+									<Label text="ID do App" labelFor="appid"/>
+									<Input id="appid" value="{model>/AppId}" required="true"/>
+							
+									<Label text="Código" labelFor="codigo"/>
+									<Input id="codigo" value="{model>/Codigo}" required="true"/>
+									
+									<Label text="Nome no menu" labelFor="nomemenu"/>
+									<Input id="nomemenu" value="{model>/NomeMenu}" required="true"/>
+									
+									<Label text="URL" labelFor="url"/>
+									<Input id="url" value="{model>/Path}" required="true"/>
+									
+									<Label text="Módulo" labelFor="modulo"/>
+									<ComboBox selectedKey="{model>/Modulo}"
+										items="{path: '/Modulos'}"
+										required="true"
+										id="modulo"> 
+										<core:ListItem key="{Id}" text="{Nome}"/>
+									</ComboBox>
+									
+									<Label text="Descrição" labelFor="descricao"/>
+									<TextArea id="descricao" value="{model>/Descricao}" rows="6" maxLength="254"/>
+								</f:content>
+							</f:SimpleForm>
+						</Panel>
 					</VBox>
 				</content>
 				<footer>
 					<Toolbar>
 						<ToolbarSpacer/>
-						<Button id="salvar" text="Salvar" press="onSalvar" class="sapUiSmallMarginEnd"/>
+						<Button text="Salvar" icon="sap-icon://save" press="onSalvarApp"/>
+						<Button text="Cancelar" icon="sap-icon://reset" press="onVoltar"/>
 					</Toolbar>
 				</footer>
 			</Page>

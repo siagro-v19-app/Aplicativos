@@ -16,9 +16,10 @@ sap.ui.define([
 		onRefresh: function(e){
 			var oModel = this.getOwnerComponent().getModel();
 			oModel.refresh(true);
+			this.getView().byId("tableApp").clearSelection();
 		},
 		
-		onIncluir: function(){
+		onIncluirApp: function(){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			var oTable = this.byId("tableApp"); 
 			
@@ -29,13 +30,13 @@ sap.ui.define([
 			oTable.clearSelection();
 		},
 		
-		onEditar: function(){
+		onEditarApp: function(){
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			var oTable = this.byId("tableApp");
 			var nIndex = oTable.getSelectedIndex();
 			
 			if (nIndex === -1){
-				MessageBox.information("Selecione um aplicativo da tabela.");
+				MessageBox.warning("Selecione um aplicativo na tabela.");
 				return;
 			}
 			
@@ -47,13 +48,13 @@ sap.ui.define([
 			oTable.clearSelection();
 		},
 		
-		onRemover: function(e){
+		onRemoverApp: function(e){
 			var that = this;
 			var oTable = this.byId("tableApp");
 			var nIndex = oTable.getSelectedIndex();
 			
 			if (nIndex === -1){
-				MessageBox.information("Selecione um aplicativo na tabela.");
+				MessageBox.warning("Selecione um aplicativo na tabela.");
 				return;
 			}
 			
