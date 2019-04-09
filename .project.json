@@ -52,8 +52,8 @@
     "excludedFiles": []
   },
   "mockpreview": {
-    "mockUri": "/SIAGRO/siagro-odata/service.svc",
-    "metadataFilePath": "",
+    "mockUri": "/SIAGRO/siagro-odata/service.svc/",
+    "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""

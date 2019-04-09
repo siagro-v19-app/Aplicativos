@@ -4,7 +4,7 @@ sap.ui.define([
 	], function (UI5Object, MessageBox) {
 		"use strict";
 
-		return UI5Object.extend("br.com.idxtectreino01.controller.ErrorHandler", {
+		return UI5Object.extend("br.com.idxtecAplicativos.services.ErrorHandler", {
 
 			constructor : function (oComponent) {
 				this._oComponent = oComponent;
@@ -32,12 +32,6 @@ sap.ui.define([
 				}, this);
 			},
 
-			/**
-			 * Shows a {@link sap.m.MessageBox} when a service call has failed.
-			 * Only the first error message will be display.
-			 * @param {string} sDetails a technical error to be displayed on request
-			 * @private
-			 */
 			_showServiceError : function (sDetails) {
 				if (this._bMessageOpen) {
 					return;
