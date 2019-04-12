@@ -9,7 +9,7 @@
 			<Page showHeader="false">
 				<content>
 					<VBox class="sapUiSmallMargin">
-						<Panel headerText="Aplicativos">
+						<Panel headerText="{view>/titulo}">
 							<f:SimpleForm id="formApp"
 								editable="true"
 								layout="ResponsiveGridLayout"
@@ -27,7 +27,7 @@
 								columnsM="2"
 								singleContainerFullSize="false">
 								<f:content>
-									<core:Title text="{view>/titulo}"/>
+		
 									<Label text="ID do App" labelFor="appid"/>
 									<Input id="appid" value="{model>/AppId}" required="true"/>
 							
@@ -58,8 +58,8 @@
 				<footer>
 					<Toolbar>
 						<ToolbarSpacer/>
-						<Button text="Salvar" icon="sap-icon://save" press="onSalvarApp"/>
-						<Button text="Cancelar" icon="sap-icon://reset" press="onVoltar"/>
+						<Button text="Salvar" press="onSalvarApp" type="Accept"/>
+						<Button text="Fechar" press="onVoltar" type="Reject"/>
 					</Toolbar>
 				</footer>
 			</Page>
