@@ -16,7 +16,7 @@ sap.ui.define([
 		},
 		
 		filtraApp: function(oEvent){
-			var sQuery = oEvent.getParameter("query");
+			var sQuery = oEvent.getParameter("query").toUpperCase();
 			var oFilter = new Filter("Codigo", FilterOperator.Contains, sQuery);
 			
 			var aFilters = [
